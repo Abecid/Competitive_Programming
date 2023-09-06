@@ -1,15 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
-int n;
+int t;
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	cin>>n;
-	if(n>=4&&(n%2==0)){
-		puts("YES");
-	}
-	else{
-		puts("NO");
+	cin>>t;
+	while(t--){
+		int a,b;
+		cin>>a>>b;
+		printf("%d\n",a+b);
 	}
 	return 0;
 }
