@@ -15,13 +15,13 @@ signed main(){
 
     int sum = 0;
 
-	while(n--) {
-		int num;
+    for(int i=0; i<n; i++) {
+        int num;
 		cin >> num;
         a.push_back(num);
         sum += num;
         prefix_sum.push_back(sum);
-	}
+    }
 
     vector<int> next_k_sum;
 
