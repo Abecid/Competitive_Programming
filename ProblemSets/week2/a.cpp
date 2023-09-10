@@ -1,49 +1,64 @@
 #include<bits/stdc++.h>
-using namespace std;
+#include <iostream>
 #include <vector>
+#include <string>
+
+using namespace std;
+
+void solve() {
+
+}
 
 int t;
-signed main(){
+signed main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-    int n, k;
-    cin >> n >> k;
+    string s;
+    cin >> s;
 
-    vector<int> a;
     vector<int> prefix_sum;
 
-    int sum = 0;
+    char prev = s[0];
 
-    for(int i=0; i<n; i++) {
-        int num;
-		cin >> num;
-        a.push_back(num);
-        sum += num;
-        prefix_sum.push_back(sum);
-    }
-
-    vector<int> next_k_sum;
-
-    int min = -1;
-    int min_index = -1;
-    for(int i=0; i<n-(k-1); i++) {
-        int sum;
+    for(int i = 0; i < s.length(); i++) {
+        char c = s[i];
+        int equals = 0;
+        
+        if(i == s.length()-1) {
+            prefix_sum.push_back(prefix_sum[i-1]);
+            break;
+        }
+        if(c == s[i+1]) {
+            equals = 1;
+        }
 
         if(i == 0) {
-            sum = prefix_sum[i+k-1];
-        } else {
-            sum = prefix_sum[i+k-1] - prefix_sum[i-1];
+            prefix_sum.push_back(equals);
+            prev = c;
+            continue;
         }
 
-        next_k_sum.push_back(sum);
-        if(sum < min || min == -1){
-            min = sum;
-            min_index = i;
-        }
+        prefix_sum.push_back(prefix_sum[i-1] + equals);
+        prev = c;
     }
 
-    cout << min_index+1 << endl;
+    // Read the number of queries m
+    int m;
+    cin >> m;
+
+    // Read each query
+    for(int i = 0; i < m; i++) {
+        int li, ri;
+        cin >> li >> ri;
+        li--;
+        ri--;
+
+        if(li == 0)
+            cout << prefix_sum[ri-1] << endl;
+        else
+            cout << (prefix_sum[ri-1] - prefix_sum[li-1]) << endl;
+    }
 
 	return 0;
 }
